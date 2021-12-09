@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const AuthContext = React.createContext({
     
-    isLoggedIn: false,
+    isLoggedIn: true,
     onLoginHandler: () => { }
 });
 

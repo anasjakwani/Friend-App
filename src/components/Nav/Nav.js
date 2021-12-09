@@ -14,27 +14,30 @@ import MenuItem from "@mui/material/MenuItem";
 import MediaCard, { ImageContext } from "../../components/ProfileCard/ProfileCard"
 import {useContext} from "react"
 import AddPost from "../Post/AddPost"
+import Home from "../../pages/web/Home";
+import Setting from "../../pages/web/Setting";
+import { Link as RoutLink } from "react-router-dom";
 
 
-const pages = [{name:"Home",path:"/home"}, {name:"Setting", path:"/setting"}];
-const posts = [<AddPost/>];
+
 // const settings = ["Profile", "Account", "Logout"];
+const pages = [{name:"Home",path:<RoutLink to="/home"/>}, {name:"Setting", path:<RoutLink to="/setting"/>}, {name:<AddPost/>}];
 
 const ResponsiveAppBar = () => {
+  pages.map(page=>{
+    console.log(page)
+  })
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [anchorElPost, setAnchorElPost] = React.useState(null);
   const img =useContext(ImageContext)
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
+    
   };
-  const handleOpenPost = (event) => {
-    setAnchorElPost(event.currentTarget);
-  };
-  const handleClosePost = () => {
-    setAnchorElPost(null);
-  };
+  
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -90,15 +93,11 @@ const ResponsiveAppBar = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                <MenuItem key={page.path} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page.name}</Typography>
                 </MenuItem>
               ))}
-              {posts.map((post) => (
-                <MenuItem key={post} onClick={handleClosePost}>
-                  <Typography textAlign="center">{post}</Typography>
-                </MenuItem>
-              ))}
+             
             </Menu>
           </Box>
           <Typography
@@ -111,23 +110,19 @@ const ResponsiveAppBar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
+              
               <Button
                 key={page.path}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
+                
               >
                 {page.name}
+                
               </Button>
+              
             ))}
-            {posts.map((post) => (
-              <Button
-                key={post}
-                onClick={handleClosePost}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {post}
-              </Button>
-            ))}
+           
           </Box> 
           <Box sx={{ flexGrow: 0 }}>
       
@@ -141,7 +136,7 @@ const ResponsiveAppBar = () => {
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
-              anchorEl={anchorElUser, anchorElPost}
+              anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: "top",
                 horizontal: "left",
@@ -151,9 +146,10 @@ const ResponsiveAppBar = () => {
                 vertical: "top",
                 horizontal: "left",
               }}
-              open={Boolean(anchorElUser,anchorElPost)}
+              open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
-            >          
+            > 
+            
                 <MediaCard />            
             </Menu>
           </Box>

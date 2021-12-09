@@ -45,24 +45,16 @@ function Media(props) {
             'Ted'
           )
         }
-        subheader={
-          loading ? (
-            <Skeleton animation="wave" height={10} width="40%" />
-          ) : (
-            '5 hours ago'
-          )
-        }
+        
       />
-      {loading ? (
-        <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
-      ) : (
+      
         <CardMedia
           component="img"
-          height="140"
+          height="250"
           image="https://pi.tedcdn.com/r/talkstar-photos.s3.amazonaws.com/uploads/72bda89f-9bbf-4685-910a-2f151c4f3a8a/NicolaSturgeon_2019T-embed.jpg?w=512"
           alt="Nicola Sturgeon on a TED talk stage"
         />
-      )}
+      
 
       <CardContent>
         {loading ? (
@@ -89,7 +81,6 @@ Media.propTypes = {
 export default function Facebook() {
   return (
     <div>
-      <Media loading />
       <Media />
     </div>
   );
