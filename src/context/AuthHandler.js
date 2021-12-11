@@ -6,8 +6,7 @@ import LoginRouting from '../routing/LoginRouting'
 const AuthHandler =()=>{
     
     const authCtx = useContext(Authcontext);
-    return (
-    authCtx.isLoggedIn ? <LoginRouting /> : <WebRouting />)
+    return (authCtx.isLoggedIn ? <LoginRouting /> : <WebRouting />)
 }
 
 

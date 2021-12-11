@@ -40,7 +40,7 @@ export default function MultiActionAreaCard() {
             />
             <Stack direction="row" alignItems="center" spacing={1}>
               <label htmlFor="icon-button-file">
-                <Input accept="image/*" onChange={imageHandler} id="icon-button-file" type="file" sx={{ display: 'none' }} />
+                <Input accept="image/*" value={image} onChange={imageHandler} id="icon-button-file" type="file" sx={{ display: 'none' }} />
                 <IconButton
                   color="primary"
                   aria-label="upload picture"

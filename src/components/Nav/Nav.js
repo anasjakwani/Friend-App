@@ -13,6 +13,8 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import MediaCard from "../../components/ProfileCard/ProfileCard"
 import AddPost from "../Post/AddPost"
+import { profilePic } from "../ProfileCard/ProfileCard";
+
 
 
 
@@ -120,9 +122,8 @@ const ResponsiveAppBar = () => {
       
             <Tooltip title="Open Profile">
             
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                
-                <Avatar alt="Remy Sharp"/>
+              <IconButton  onClick={handleOpenUserMenu} sx={{ p: 0,}}>
+         {profilePic}
               </IconButton>
             </Tooltip>
             <Menu
