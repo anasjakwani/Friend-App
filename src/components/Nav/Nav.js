@@ -11,26 +11,18 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import MediaCard, { ImageContext } from "../../components/ProfileCard/ProfileCard"
-import {useContext} from "react"
+import MediaCard from "../../components/ProfileCard/ProfileCard"
 import AddPost from "../Post/AddPost"
-import Home from "../../pages/web/Home";
-import Setting from "../../pages/web/Setting";
-import { Link as RoutLink } from "react-router-dom";
 
 
 
 // const settings = ["Profile", "Account", "Logout"];
-const pages = [{name:"Home",path:<RoutLink to="/home"/>}, {name:"Setting", path:<RoutLink to="/setting"/>}, {name:<AddPost/>}];
+const pages = ["Home",<AddPost/>];
 
 const ResponsiveAppBar = () => {
-  pages.map(page=>{
-    console.log(page)
-  })
-
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const img =useContext(ImageContext)
+  
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -93,8 +85,8 @@ const ResponsiveAppBar = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.path} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page.name}</Typography>
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
              
@@ -112,12 +104,12 @@ const ResponsiveAppBar = () => {
             {pages.map((page) => (
               
               <Button
-                key={page.path}
+                key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
                 
               >
-                {page.name}
+                {page}
                 
               </Button>
               
@@ -130,7 +122,7 @@ const ResponsiveAppBar = () => {
             
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 
-                <Avatar alt="Remy Sharp" value={img} />
+                <Avatar alt="Remy Sharp"/>
               </IconButton>
             </Tooltip>
             <Menu
@@ -150,7 +142,7 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             > 
             
-                <MediaCard />            
+                <MediaCard/>            
             </Menu>
           </Box>
         </Toolbar>

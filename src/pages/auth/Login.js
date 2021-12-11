@@ -13,26 +13,23 @@ import { Link as RoutLink, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
 import { app, analytics } from "../../firebase/Firebase";
-import AuthContext from "../../context/AuthContext";
+import Authcontext from "../../context/AuthContext";
+
 
 const theme = createTheme();
 
-export default function Login() {
-  
-  const authCtx = useContext(AuthContext);
-  
-  const onLoginHandler = () => {
-    authCtx.onLoginHandler();
-  };
 
+export default function Login() {
+  const authLogin = useContext(Authcontext)
+  
   let navigate = useNavigate();
   const LoginAuth = (email, password, navigate) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
-        onLoginHandler();
+        console.log(user.uid);
+        authLogin.onLogin()
         navigate("/home/");
       })
       .catch((error) => {

@@ -5,7 +5,7 @@ import PostCard from "../../components/Post/PostCard"
 const Home = () => {
   return (
     <>
-    <Nav/>
+    <Nav />
     <PostCard />
     </>
   );
