@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,26 +11,20 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import MediaCard from "../../components/ProfileCard/ProfileCard"
-import AddPost from "../Post/AddPost"
-import { profilePic } from "../ProfileCard/ProfileCard";
-
-
-
+import MediaCard from "../../components/ProfileCard/ProfileCard";
+import AddPost from "../Post/AddPost";
+import ProfileCard from "../ProfileCard/ProfileCard";
 
 // const settings = ["Profile", "Account", "Logout"];
-const pages = ["Home",<AddPost/>];
+const pages = ["Home", <AddPost />];
 
-const ResponsiveAppBar = () => {
-   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  
+const ResponsiveAppBar = (image) => {
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-    
   };
-  
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -91,7 +85,6 @@ const ResponsiveAppBar = () => {
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
-             
             </Menu>
           </Box>
           <Typography
@@ -104,26 +97,19 @@ const ResponsiveAppBar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
-                
               >
                 {page}
-                
               </Button>
-              
             ))}
-           
-          </Box> 
+          </Box>
           <Box sx={{ flexGrow: 0 }}>
-      
             <Tooltip title="Open Profile">
-            
-              <IconButton  onClick={handleOpenUserMenu} sx={{ p: 0,}}>
-         {profilePic}
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar image={image} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -141,9 +127,8 @@ const ResponsiveAppBar = () => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
-            > 
-            
-                <MediaCard/>            
+            >
+              <MediaCard />
             </Menu>
           </Box>
         </Toolbar>

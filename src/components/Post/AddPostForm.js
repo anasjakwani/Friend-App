@@ -45,6 +45,7 @@ export default function MultiActionAreaCard() {
                   color="primary"
                   aria-label="upload picture"
                   component="span"
+                  title="Add Image Here."
                 >
                   <PhotoCamera />
                 </IconButton>
@@ -71,6 +72,7 @@ export default function MultiActionAreaCard() {
           }}
           size="small"
           color="primary"
+          title="Click to Post"
         >
           Post
         </Button>

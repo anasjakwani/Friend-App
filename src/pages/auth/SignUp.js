@@ -10,48 +10,36 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link as RoutLink, useNavigate } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { app, analytics } from "../../firebase/Firebase";
+
 
 const theme = createTheme();
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const userName=useRef(null)
-  const [email, setEmail] = useState("");
-  const [password, setpassword] = useState("");
+  const userNameRef=useRef(null)
+  const userEmailRef=useRef(null)
+  const userPassRef=useRef(null)
 
   const onButtonClick = () => {
-    console.log(userName.current.focus());
+    const userName=userNameRef.current.value;
+    const email=userEmailRef.current.value;
+    const password=userPassRef.current.value;
+    const CreateUser = (email, password, navigate) => {
+   
+      const auth = getAuth();
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+         navigate("/login/");
+        })
+    };
+      CreateUser( email, password, navigate);
   };
-  const emailHandler = (e) => {
-    setEmail(e.target.value);
-    console.log(email);
-  };
-  const passHandler = (e) => {
-    setpassword(e.target.value);
-    console.log(password);
-  };
-  const CreateUser = (email, password, navigate) => {
-    onButtonClick()
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-        navigate("/login/");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage, errorCode);
-      });
-  };
-  const SignUpAuth = (e) => {
-    e.preventDefault();
-    CreateUser(email, password, navigate);
-  };
+  
+  
 
   return (
     <ThemeProvider theme={theme}>
@@ -63,6 +51,7 @@ export default function SignUp() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
@@ -73,19 +62,20 @@ export default function SignUp() {
             <Grid container spacing={2}>
             <Grid item xs={12}>
                 <TextField
-                  ref={userName}
+                  inputRef={userNameRef}
                   required
                   fullWidth
                   id="text"
                   label="User Name"
                   name="text"
                   autoComplete="text"
+                  
                 />
               </Grid>
              
               <Grid item xs={12}>
                 <TextField
-                  onChange={emailHandler}
+                  inputRef={userEmailRef}
                   required
                   fullWidth
                   id="email"
@@ -96,7 +86,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  onChange={passHandler}
+                  inputRef={userPassRef}
                   required
                   fullWidth
                   name="password"
@@ -108,7 +98,7 @@ export default function SignUp() {
               </Grid>
             </Grid>
             <Button
-              onClick={SignUpAuth}
+              onClick={onButtonClick}
               type="submit"
               fullWidth
               variant="contained"
@@ -124,6 +114,7 @@ export default function SignUp() {
               </Grid>
             </Grid>
           </Box>
+          
         </Box>
       </Container>
     </ThemeProvider>
